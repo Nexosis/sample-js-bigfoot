@@ -1,5 +1,4 @@
 const CSV = require('csvtojson');
-const moment = require('moment');
 const saver = require('./saver');
 
 function aggregateDataForComparison(inputFilename, outputFilename) {

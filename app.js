@@ -9,7 +9,9 @@ const results = require('./src/results');
 const saver = require('./src/saver');
 
 loader.aggregateDataForComparison('bfro-report-locations.csv', 'output/monthly-bigfoot-sightings.csv')
-  .then(() => loader.loadToNexosis(client, 'bigfootsightings', 'bfro-report-locations.csv'))
+  .catch(reason => console.log('Error:', reason));
+
+loader.loadToNexosis(client, 'bigfootsightings', 'bfro-report-locations.csv')
   .then(() => Promise.all([
     processForecstSession(),
     processImpactSession()
