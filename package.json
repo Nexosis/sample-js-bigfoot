@@ -1,8 +1,9 @@
 {
-  "name": "nexosis-sample",
+  "name": "nexosis-bigfoot-js",
   "version": "1.0.0",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "clean": "rm output/*.csv && rm output/*.json"
   },
   "private": true,
   "dependencies": {
