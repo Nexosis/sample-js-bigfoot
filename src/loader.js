@@ -1,20 +1,22 @@
 const CSV = require('csvtojson');
 const saver = require('./saver');
 
-function aggregateDataForComparison(inputFilename, outputFilename) {
-  return loadBigfootSightingsFromCSV(inputFilename)
-    .then(sightings => transformSightings(sightings))
-    .then(sightings => aggregateSightings(sightings))
-    .then(sightings => saver.saveToCSV(sightings, outputFilename, ['date', 'quantity']));
+function loadSightingsFromCSV(filename) {
+  console.log('Loading data from CSV...');
+  return new Promise(function(resolve, reject) {
+    let sightings = [];
+    CSV()
+      .fromFile(filename)
+      .on('json', sighting => sightings.push(sighting))
+      .on('done', () => resolve(sightings));
+  });
 }
 
-function loadToNexosis(client, datasetName, filename) {
+function uploadSightings(client, datasetName, sightings) {
   return client.DataSets.list()
     .then(datasets => isBigfootDataAlreadyLoaded(datasets))
     .then(isLoaded => deleteIfLoaded(isLoaded))
-    .then(() => loadBigfootSightingsFromCSV(filename))
-    .then(sightings => transformSightings(sightings))
-    .then(sightings => uploadSightings(sightings));
+    .then(() => uploadSightings(transformSightings(sightings)));
 
   function isBigfootDataAlreadyLoaded(datasets) {
     console.log('Looking for existing dataset...');
@@ -36,17 +38,6 @@ function loadToNexosis(client, datasetName, filename) {
   }
 }
 
-function loadBigfootSightingsFromCSV(filename) {
-  console.log('Loading data from CSV...');
-  return new Promise(function(resolve, reject) {
-    let sightings = [];
-    CSV()
-      .fromFile(filename)
-      .on('json', sighting => sightings.push(sighting))
-      .on('done', () => resolve(sightings));
-  });
-}
-
 function transformSightings(sightings) {
   console.log(`Transforming ${sightings.length} sightings...`);
   return sightings
@@ -64,38 +55,8 @@ function transformSightings(sightings) {
       let startDate = '1950-01-01';
       let endDate = '2017-01-01';
       return sightingDate >= startDate && sightingDate < endDate;
-    })
-    .sort((a, b) => {
-      if (a.date < b.date) return -1;
-      if (a.date > b.date) return 1;
-      return 0;
     });
 }
 
-function aggregateSightings(sightings) {
-  return sightings
-    .map(sighting => {
-      return {
-        date: sighting.date.substring(0,7),
-        quantity: sighting.quantity
-      }
-    })
-    .reduce((groupedSightings, sighting) => {
-      let groupedSighting = groupedSightings.find(groupedSighting => groupedSighting.date === sighting.date);
-      if (groupedSighting) {
-        groupedSighting.quantity = groupedSighting.quantity + sighting.quantity;
-      } else {
-        groupedSightings.push(sighting);
-      }
-      return groupedSightings;
-    }, [])
-    .map(groupedSighting => {
-      return {
-        date: `${groupedSighting.date}-01`,
-        quantity: groupedSighting.quantity
-      }
-    });
-}
-
-exports.aggregateDataForComparison = aggregateDataForComparison
-exports.loadToNexosis = loadToNexosis
+exports.loadSightingsFromCSV = loadSightingsFromCSV
+exports.uploadSightings = uploadSightings

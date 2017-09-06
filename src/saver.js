@@ -1,14 +1,14 @@
 const json2csv = require('json2csv');
 const fs = require('fs');
 
-function saveDataToCSV(results, filename) {
-  console.log(`Saving results for session ${results.sessionId} to ${filename}...`);
-  return saveToCSV(results.data, filename, ['date', 'quantity']);
+function saveDataToCSV(data, filename) {
+  console.log(`Saving results to ${filename}...`);
+  return saveToCSV(data, filename, ['date', 'quantity']);
 }
 
-function saveMetricsToCSV(results, filename) {
-  console.log(`Saving metrics for session ${results.sessionId} to ${filename}...`);
-  return saveToCSV(results.metrics, filename, ['pValue', 'absoluteEffect', 'relativeEffect']);
+function saveMetricsToCSV(metrics, filename) {
+  console.log(`Saving metrics to ${filename}...`);
+  return saveToCSV(metrics, filename, ['pValue', 'absoluteEffect', 'relativeEffect']);
 }
 
 function saveToJSON(results, filename) {
@@ -31,4 +31,3 @@ function saveToFile(data, filename) {
 exports.saveDataToCSV = saveDataToCSV
 exports.saveMetricsToCSV = saveMetricsToCSV
 exports.saveToJSON = saveToJSON
-exports.saveToCSV = saveToCSV
