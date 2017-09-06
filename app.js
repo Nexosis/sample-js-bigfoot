@@ -8,8 +8,8 @@ const session = require('./src/session');
 const results = require('./src/results');
 const saver = require('./src/saver');
 
-loader
-  .loadToNexosis(client, 'bigfootsightings', 'bfro-report-locations.csv')
+loader.aggregateDataForComparison('bfro-report-locations.csv', 'output/monthly-bigfoot-sightings.csv')
+  .then(() => loader.loadToNexosis(client, 'bigfootsightings', 'bfro-report-locations.csv'))
   .then(() => Promise.all([
     processForecstSession(),
     processImpactSession()
@@ -18,7 +18,7 @@ loader
 
 function processForecstSession() {
   return session
-    .createForecast(client, 'bigfootsightings', '2017-01', '2020-01')
+    .createForecast(client, 'bigfootsightings', '2017-01', '2020-01', 'month')
     .then(sessionId => results.fetch(client, sessionId))
     .then(results => Promise.all([
       saver.saveDataToCSV(results, 'output/bigfoot-sightings-forecast.csv'),
@@ -28,7 +28,7 @@ function processForecstSession() {
 
 function processImpactSession() {
   return session
-    .createImpactAnalysis(client, 'bigfootsightings', '1994-01', '2002-01', 'x-files')
+    .createImpactAnalysis(client, 'bigfootsightings', '1993-10', '2002-04', 'x-files', 'month')
     .then(sessionId => results.fetch(client, sessionId))
     .then(results => Promise.all([
       saver.saveDataToCSV(results, 'output/x-files-impact-on-bigfoot-sightings.csv'),

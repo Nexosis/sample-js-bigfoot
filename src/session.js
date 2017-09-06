@@ -1,5 +1,5 @@
 const COLUMN_METADATA = {
-  timestamp:      { dataType: 'date',    role: 'timestamp' },
+  date:           { dataType: 'date',    role: 'timestamp' },
   classification: { dataType: 'string',  role: 'none'      },
   latitude:       { dataType: 'numeric', role: 'none'      },
   longitude:      { dataType: 'numeric', role: 'none'      },

@@ -3,7 +3,7 @@ const fs = require('fs');
 
 function saveDataToCSV(results, filename) {
   console.log(`Saving results for session ${results.sessionId} to ${filename}...`);
-  return saveToCSV(results.data, filename, ['timestamp', 'quantity']);
+  return saveToCSV(results.data, filename, ['date', 'quantity']);
 }
 
 function saveMetricsToCSV(results, filename) {
@@ -31,3 +31,4 @@ function saveToFile(data, filename) {
 exports.saveDataToCSV = saveDataToCSV
 exports.saveMetricsToCSV = saveMetricsToCSV
 exports.saveToJSON = saveToJSON
+exports.saveToCSV = saveToCSV
