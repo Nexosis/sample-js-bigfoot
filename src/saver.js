@@ -3,7 +3,13 @@ const fs = require('fs');
 
 function saveDataToCSV(data, filename) {
   console.log(`Saving results to ${filename}...`);
-  return saveToCSV(data, filename, ['date', 'quantity']);
+  formattedData = data.map(sighting => {
+    return {
+      date: sighting.date.format('M/D/YYYY'),
+      quantity: String(sighting.quantity)
+    }
+  })
+  return saveToCSV(formattedData, filename, ['date', 'quantity']);
 }
 
 function saveMetricsToCSV(metrics, filename) {
