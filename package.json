@@ -2,14 +2,17 @@
   "name": "nexosis-bigfoot-js",
   "version": "1.0.0",
   "scripts": {
-    "start": "node app.js",
-    "clean": "rm output/*.csv && rm output/*.json"
+    "aggregate": "node aggregate.js",
+    "upload": "node upload.js",
+    "impact": "node impact.js",
+    "forecast": "node forecast.js"
   },
   "private": true,
   "dependencies": {
     "csvtojson": "^1.1.7",
     "json2csv": "^3.11.1",
     "moment": "^2.18.1",
-    "nexosis-api-client": "^1.0.2"
+    "nexosis-api-client": "^1.0.2",
+    "yargs": "^9.0.1"
   }
 }

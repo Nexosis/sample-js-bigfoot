@@ -2,3 +2,4 @@
 node_modules
 output/*
 !output/EMPTY.md
+!output/bfro-report-locations.csv
