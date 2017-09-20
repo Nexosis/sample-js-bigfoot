@@ -1,7 +1,7 @@
 const argv = require('yargs').argv
 
 const DATASET_NAME = argv.datasetName || 'bigfootsightings';
-const OUTPUT_FILE = argv.output || 'output/forecasted-bigfoot-sightings.csv';
+const OUTPUT_FILE = argv.output || 'data/forecasted-bigfoot-sightings.csv';
 const START_DATE = argv.startDate || '2017-01';
 const END_DATE = argv.endDate || '2020-01';
 const NEXOSIS_API_KEY = argv.apiKey || process.env.NEXOSIS_API_KEY;

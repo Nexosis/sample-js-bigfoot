@@ -1,7 +1,7 @@
 const argv = require('yargs').argv
 
-const INPUT_FILE = argv.input || 'bfro-report-locations.csv';
-const OUTPUT_FILE = argv.output || 'output/monthly-bigfoot-sightings.csv';
+const INPUT_FILE = argv.input || 'data/bfro-report-locations.csv';
+const OUTPUT_FILE = argv.output || 'data/monthly-bigfoot-sightings.csv';
 const START_DATE = argv.startDate || '1950-01';
 const END_DATE = argv.endDate || '2017-01';
 

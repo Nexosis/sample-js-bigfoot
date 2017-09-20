@@ -1,8 +1,8 @@
 const argv = require('yargs').argv
 
 const DATASET_NAME = argv.datasetName || 'bigfootsightings';
-const OUTPUT_FILE = argv.output || 'output/impact-on-bigfoot-sightings.csv';
-const METRICS_FILE = argv.metrics || 'output/impact-on-bigfoot-sightings-metrics.csv';
+const OUTPUT_FILE = argv.output || 'data/impact-on-bigfoot-sightings.csv';
+const METRICS_FILE = argv.metrics || 'data/impact-on-bigfoot-sightings-metrics.csv';
 const START_DATE = argv.startDate || '1993-09';
 const END_DATE = argv.endDate || '2002-05';
 const EVENT_NAME = argv.eventName || 'impact-on-bigfoot-sightings';

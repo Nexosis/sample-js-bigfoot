@@ -1,6 +1,6 @@
 const argv = require('yargs').argv
 
-const INPUT_FILE = argv.input || 'output/monthly-bigfoot-sightings.csv';
+const INPUT_FILE = argv.input || 'data/monthly-bigfoot-sightings.csv';
 const DATASET_NAME = argv.datasetName || 'bigfootsightings';
 const NEXOSIS_API_KEY = argv.apiKey || process.env.NEXOSIS_API_KEY;
 
