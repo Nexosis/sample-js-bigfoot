@@ -2,10 +2,10 @@
   "name": "nexosis-bigfoot-js",
   "version": "1.0.0",
   "scripts": {
-    "aggregate": "node aggregate.js",
-    "upload": "node upload.js",
-    "impact": "node impact.js",
-    "forecast": "node forecast.js"
+    "aggregate": "node src/aggregate.js",
+    "upload": "node src/upload.js",
+    "impact": "node src/impact.js",
+    "forecast": "node src/forecast.js"
   },
   "private": true,
   "dependencies": {
