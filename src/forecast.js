@@ -26,13 +26,13 @@ function createForecast(datasetName, startDate, endDate) {
 }
 
 function fetchResults(sessionId, interval) {
-  console.log(`Fetching session results for impact session ${sessionId}`);
+  console.log(`Fetching session results for forecast session ${sessionId}`);
 
   return new Promise(function(resolve, reject) {
     let intervalHandle = setInterval(checkStatus, interval);
 
     function checkStatus() {
-      console.log(`Checking status for impact session ${sessionId}`);
+      console.log(`Checking status for forecast session ${sessionId}`);
 
       fetchStatus().then(status => {
         if (isDone(status)) {
@@ -60,7 +60,7 @@ function fetchResults(sessionId, interval) {
 
 function saveForecastData(data, filename) {
 
-  console.log(`Saving impact data to ${filename}...`);
+  console.log(`Saving forecast data to ${filename}...`);
 
   let formattedData = data
     .map(sighting => formatSighting(sighting));
@@ -73,15 +73,15 @@ function saveForecastData(data, filename) {
       quantity: Number(sighting.quantity)
     }
   }
-}
 
-function saveToCSV(data, filename, fields) {
-  let csv = json2csv({ data, fields });
-  return saveToFile(csv, filename);
-}
+  function saveToCSV(data, filename, fields) {
+    let csv = json2csv({ data, fields });
+    return saveToFile(csv, filename);
+  }
 
-function saveToFile(data, filename) {
-  return new Promise(function(resolve, reject) {
-    fs.writeFile(filename, data, err => err ? reject(err) : resolve());
-  });
+  function saveToFile(data, filename) {
+    return new Promise(function(resolve, reject) {
+      fs.writeFile(filename, data, err => err ? reject(err) : resolve());
+    });
+  }
 }
